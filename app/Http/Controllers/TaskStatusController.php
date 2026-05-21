@@ -12,7 +12,8 @@ class TaskStatusController extends Controller
      */
     public function index()
     {
-        return view('task_status.index');
+        $taskStatuses = TaskStatus::query()->paginate();
+        return view('task_statuses.index', compact('taskStatuses'));
     }
 
     /**
@@ -20,7 +21,8 @@ class TaskStatusController extends Controller
      */
     public function create()
     {
-        return view('task_status.create');
+        $status = new TaskStatus();
+        return view('task_statuses.create', compact('status'));
     }
 
     /**
@@ -28,7 +30,14 @@ class TaskStatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|min:1|unique:task_statuses'
+        ]);
+
+        $status = new TaskStatus();
+        $status->fill($data)->save();
+
+        return redirect()->route('task_statuses.index');
     }
 
     /**
@@ -42,24 +51,35 @@ class TaskStatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TaskStatus $taskStatus)
+    public function edit($id)
     {
-        return view('task_status.edit', compact('taskStatus'));
+        $status = TaskStatus::findOrFail($id);
+        return view('task_statuses.edit', compact('status'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TaskStatus $taskStatus)
+    public function update(Request $request, $id)
     {
-        //
+        $status = TaskStatus::findOrFail($id);
+
+        $data = $request->validate([
+            'name' => "required|min:1|unique:task_statuses,name,{$status->id}"
+        ]);
+
+        $status->fill($data)->save();
+
+        return redirect()->route('task_statuses.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TaskStatus $taskStatus)
+    public function destroy($id)
     {
-        //
+        TaskStatus::destroy($id);
+
+        return redirect()->route('task_statuses.index');
     }
 }

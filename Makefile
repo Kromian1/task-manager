@@ -7,5 +7,6 @@ lint:
 init:
 	cp .env.example .env
 	php artisan key:generate
-	php artisan migrate
-	php artisan db:seed
+	php artisan migrate:fresh --seed
+start-dev:
+	composer dev
