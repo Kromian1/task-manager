@@ -23,20 +23,20 @@ class TaskStatusPolicy
     {
         return Auth::check()
             ? Response::allow()
-            : Response::deny('У вас недостаточно прав для создания статуса');
+            : Response::deny(__('You do not have permission to create status'));
     }
 
     public function update(User $user, TaskStatus $taskStatus): Response
     {
         return Auth::check()
             ? Response::allow()
-            : Response::deny('У вас недостаточно прав для изменения статуса');
+            : Response::deny(__('You do not have permission to update status'));
     }
 
     public function delete(User $user, TaskStatus $taskStatus): Response
     {
         return Auth::check()
             ? Response::allow()
-            : Response::deny('У вас недостаточно прав для удаления статуса');
+            : Response::deny(__('You do not have permission to delete status'));
     }
 }

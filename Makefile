@@ -10,3 +10,9 @@ init:
 	php artisan migrate:fresh --seed
 start-dev:
 	composer dev
+test:
+	php artisan test
+test-c:
+	php artisan test --coverage
+test-h:
+	php artisan test --coverage --coverage-html=coverage-report
