@@ -21,8 +21,7 @@ class TaskStatusSeeder extends Seeder
     public function run(): void
     {
         foreach ($this->taskStatuses as $taskStatus) {
-            $status = new TaskStatus();
-            $status->fill(['name' => $taskStatus])->save();
+            TaskStatus::factory()->create(['name' => $taskStatus]);
         }
     }
 }

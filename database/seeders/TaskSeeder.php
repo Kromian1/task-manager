@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Task;
+use App\Models\TaskStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -11,9 +12,16 @@ class TaskSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-
+    private array $taskStatuses = [
+        '1',
+        '2',
+        '3',
+        '4'
+    ];
     public function run(): void
     {
-        Task::factory()->count(5)->create();
+        foreach ($this->taskStatuses as $status) {
+            Task::factory()->create(['status_id' => $status]);
+        }
     }
 }
