@@ -14,7 +14,7 @@ class TaskController extends Controller
         return view('tasks.index', compact('tasks'));
     }
 
-    public function create(Request $request)
+    public function create()
     {
         Gate::authorize('create', Task::class);
 
