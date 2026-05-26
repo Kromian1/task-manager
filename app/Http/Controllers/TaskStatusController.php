@@ -24,6 +24,8 @@ class TaskStatusController extends Controller
 
     public function store(Request $request)
     {
+        Gate::authorize('create', TaskStatus::class);
+
         $data = $request->validate([
             'name' => 'required|min:1|unique:task_statuses'
         ]);
@@ -35,7 +37,7 @@ class TaskStatusController extends Controller
         return redirect()->route('task_statuses.index');
     }
 
-    public function edit($id)
+    public function edit(int $id)
     {
         $status = TaskStatus::findOrFail($id);
 
@@ -44,7 +46,7 @@ class TaskStatusController extends Controller
         return view('task_statuses.edit', compact('status'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $status = TaskStatus::findOrFail($id);
 
@@ -58,7 +60,7 @@ class TaskStatusController extends Controller
         return redirect()->route('task_statuses.index');
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $status = TaskStatus::findOrFail($id);
         Gate::authorize('delete', $status);
