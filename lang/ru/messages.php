@@ -1,7 +1,7 @@
 <?php
 return [
     'Statuses' => 'Статусы',
-    'Tasks' => 'Статусы',
+    'Tasks' => 'Задачи',
     'Create status' => 'Создать статус',
     'Create task' => 'Создать задачу',
     'Edit task' => 'Редактировать задачу',
@@ -20,6 +20,7 @@ return [
     'Executor' => 'Исполнитель',
     'Actions' => 'Действия',
     'Are you sure?' => 'Вы уверены?',
+    'Back' => 'Назад',
     'Status successfully added' => 'Статус успешно добавлен',
     'Status successfully updated' => 'Статус успешно обновлен',
     'Status successfully deleted' => 'Статус успешно удален',

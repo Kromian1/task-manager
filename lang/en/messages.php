@@ -20,6 +20,7 @@ return [
     'Name' => 'Name',
     'Actions' => 'Actions',
     'Are you sure?' => 'Are you sure?',
+    'Back' => 'Back',
     'Status successfully added' => 'Status successfully added',
     'Status successfully updated' => 'Status successfully updated',
     'Status successfully deleted' => 'Status successfully deleted',

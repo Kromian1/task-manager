@@ -31,10 +31,10 @@
             @foreach($tasks as $task)
                 <tr class="border-b">
                     <td class="px-6 py-4">{{ $task->id }}</td>
-                    <td class="px-6 py-4">{{ $task->name }}</td>
+                    <td class="px-6 py-4"><a href="{{ route('tasks.show', $task) }}" class="underline hover:text-yellow-900">{{ $task->name }}</a></td>
                     <td class="px-6 py-4">{{ $task->status->name ?? '' }}</td>
-                    <td class="px-6 py-4">{{ $task->creator->id }}</td>
-                    <td class="px-6 py-4">{{ $task->assignee->id ?? '' }}</td>
+                    <td class="px-6 py-4">{{ $task->creator->name }}</td>
+                    <td class="px-6 py-4">{{ $task->assignee->name ?? '' }}</td>
                     <td class="px-6 py-4">{{ $task->created_at->format('d.m.Y H:i') }}</td>
                     <td class="px-6 py-4 space-x-2">
                         @can('update', $task)
