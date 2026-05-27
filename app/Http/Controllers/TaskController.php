@@ -53,10 +53,12 @@ class TaskController extends Controller
     public function edit(int $id)
     {
         $task = Task::findOrFail($id);
+        $statuses = TaskStatus::all();
+        $users = User::all();
 
         Gate::authorize('update', $task);
 
-        return view('tasks.edit', compact('task'));
+        return view('tasks.edit', compact('task', 'statuses', 'users'));
     }
 
     public function update(Request $request, int $id)
