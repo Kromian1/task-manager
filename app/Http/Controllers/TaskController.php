@@ -31,7 +31,8 @@ class TaskController extends Controller
 
         $data = $request->validate([
             'name' => 'required|min:1',
-            'status_id' => 'required|exists:task_statuses,id'
+            'status_id' => 'required|exists:task_statuses,id',
+            'assigned_to_id' => 'nullable|exists:users,id'
         ]);
 
         $task = new Task([
