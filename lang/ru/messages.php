@@ -2,6 +2,10 @@
 return [
     'Statuses' => 'Статусы',
     'Tasks' => 'Задачи',
+    'Login' => 'Авторизация',
+    'Register' => 'Регистрация',
+    'Profile' => 'Профиль',
+    'Log Out' => 'Выйти',
     'Create status' => 'Создать статус',
     'Create task' => 'Создать задачу',
     'Edit task' => 'Редактировать задачу',

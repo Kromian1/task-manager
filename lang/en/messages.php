@@ -2,6 +2,10 @@
 return [
     'Statuses' => 'Statuses',
     'Tasks' => 'Tasks',
+    'Login' => 'Login',
+    'Register' => 'Register',
+    'Profile' => 'Profile',
+    'Log Out' => 'Log Out',
     'Create status' => 'Create status',
     'Create task' => 'Create task',
     'Edit task' => 'Edit task',
