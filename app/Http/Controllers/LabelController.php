@@ -16,15 +16,15 @@ class LabelController extends Controller
 
     public function create()
     {
-        Gate::authorize('create', 'label.create');
         $label = new Label();
+        Gate::authorize('create', $label);
 
         return view('labels.create', compact('label'));
     }
 
     public function store(Request $request)
     {
-        Gate::authorize('create', 'label.create');
+        Gate::authorize('create', Label::class);
 
         $data = $request->validate([
             'name' => 'required|min:1|unique:labels,name',

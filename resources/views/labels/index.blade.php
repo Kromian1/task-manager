@@ -53,6 +53,6 @@
     </div>
 
     <div class="mt-4">
-        {{ $taskStatuses->links() }}
+        {{ $labels->links() }}
     </div>
 @endsection

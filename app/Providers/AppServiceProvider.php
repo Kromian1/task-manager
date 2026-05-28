@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Label;
 use App\Models\TaskStatus;
 use App\Policies\TaskStatusPolicy;
 use Illuminate\Support\ServiceProvider;
@@ -22,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Gate::policy(TaskStatus::class, TaskStatusPolicy::class);
+        Gate::policy(TaskStatus::class, TaskStatusPolicy::class, Label::class);
     }
 }

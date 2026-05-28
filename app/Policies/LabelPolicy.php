@@ -19,7 +19,7 @@ class LabelPolicy
         return true;
     }
 
-    public function create(User $user): bool
+    public function create(User $user): Response
     {
         return Auth::check()
             ? Response::allow()
@@ -27,7 +27,7 @@ class LabelPolicy
 
     }
 
-    public function update(User $user, Label $label): bool
+    public function update(User $user, Label $label): Response
     {
         return Auth::check()
             ? Response::allow()
@@ -35,7 +35,7 @@ class LabelPolicy
 
     }
 
-    public function delete(User $user, Label $label): bool
+    public function delete(User $user, Label $label): Response
     {
         return Auth::check()
             ? Response::allow()
