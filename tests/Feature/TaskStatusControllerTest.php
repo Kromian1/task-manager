@@ -42,11 +42,7 @@ class TaskStatusControllerTest extends TestCase
         $response = $this->actingAsGuest()->get(route('task_statuses.create'));
         $response->assertStatus(403);
 
-        $user = $this->user;
-
-        Gate::shouldReceive('authorize')->with('create', TaskStatus::class)->andReturn(true);
-
-        $response = $this->actingAs($user)->get(route('task_statuses.create'));
+        $response = $this->actingAs($this->user)->get(route('task_statuses.create'));
 
         $response->assertStatus(200);
         $response->assertViewIs('task_statuses.create');
@@ -55,67 +51,50 @@ class TaskStatusControllerTest extends TestCase
 
     public function test_store_status_success(): void
     {
-        $user = $this->user;
-
-        Gate::shouldReceive('authorize')->with('create', TaskStatus::class)->andReturn(true);
-
-        $response = $this->actingAs($user)->post(route('task_statuses.store'), [
-            'name' => 'New Task Status',
+        $response = $this->actingAs($this->user)->post(route('task_statuses.store'), [
+            'name' => 'New Task Status'
         ]);
         $response->assertValid();
         $response->assertRedirect(route('task_statuses.index'));
 
         $this->assertDatabaseHas('task_statuses', [
-            'name' => 'New Task Status',
+            'name' => 'New Task Status'
         ]);
     }
 
     #[DataProvider('InvalidNameProvider')]
     public function test_store_status_validation_fails(string $invalidName): void
     {
-        $user = $this->user;
         $this->createTaskStatus('Duplicate Name');
 
-        Gate::shouldReceive('authorize')->with('create', TaskStatus::class)->andReturn(true);
-
-        $response = $this->actingAs($user)->post(route('task_statuses.store'), [
+        $response = $this->actingAs($this->user)->post(route('task_statuses.store'), [
             'name' => $invalidName,
         ]);
         $response->assertInvalid(['name']);
         $response->assertSessionHasErrors();
     }
 
-    public function test_edit_status_success(): void
+    public function test_edit_status(): void
     {
-        $user = $this->user;
         $taskStatus = $this->createTaskStatus();
 
-        Gate::shouldReceive('authorize')->with('update', TaskStatus::class)->andReturn(true);
+        $response = $this->actingAsGuest()->get(route('task_statuses.edit', [
+            'task_status' => $taskStatus
+        ]));
 
-        $response = $this->actingAs($user)->get(route('task_statuses.edit', [
-            'task_status' => $taskStatus->id,
+        $response->assertStatus(403);
+
+        $response = $this->actingAs($this->user)->get(route('task_statuses.edit', [
+            'task_status' => $taskStatus
         ]));
         $response->assertStatus(200);
         $response->assertViewIs('task_statuses.edit');
         $response->assertViewHas('status', $taskStatus);
     }
 
-    public function test_edit_status_as_guest(): void
-    {
-        $taskStatus = $this->createTaskStatus();
-        $response = $this->actingAsGuest()->get(route('task_statuses.edit', [
-            'task_status' => $taskStatus->id,
-        ]));
-
-        $response->assertStatus(403);
-    }
-
     public function test_edit_status_non_existed(): void
     {
-        $user = $this->user;
-        Gate::shouldReceive('authorize')->with('update', TaskStatus::class)->andReturn(false);
-
-        $response = $this->actingAs($user)->get(route('task_statuses.edit', [
+        $response = $this->actingAs($this->user)->get(route('task_statuses.edit', [
             'task_status' => 000
         ]));
 
@@ -124,12 +103,10 @@ class TaskStatusControllerTest extends TestCase
 
     public function test_update_status_success(): void
     {
-        $user = $this->user;
         $taskStatus = $this->createTaskStatus();
-        Gate::shouldReceive('authorize')->with('update', TaskStatus::class)->andReturn(true);
 
-        $response = $this->actingAs($user)->patch(route('task_statuses.update', [
-            'task_status' => $taskStatus->id,
+        $response = $this->actingAs($this->user)->patch(route('task_statuses.update', [
+            'task_status' => $taskStatus
         ]), [
             'name' => 'New Task Status'
         ]);
@@ -146,13 +123,10 @@ class TaskStatusControllerTest extends TestCase
     #[DataProvider('InvalidNameProvider')]
     public function test_update_status_validation_falls(string $invalidName): void
     {
-        $user = $this->user;
         $this->createTaskStatus('Duplicate Name');
 
-        Gate::shouldReceive('authorize')->with('create', TaskStatus::class)->andReturn(true);
-
-        $response = $this->actingAs($user)->post(route('task_statuses.store'), [
-            'name' => $invalidName,
+        $response = $this->actingAs($this->user)->post(route('task_statuses.store'), [
+            'name' => $invalidName
         ]);
         $response->assertInvalid(['name']);
         $response->assertSessionHasErrors();
@@ -160,13 +134,16 @@ class TaskStatusControllerTest extends TestCase
 
     public function test_delete_status_success(): void
     {
-        $user = $this->user;
         $taskStatus = $this->createTaskStatus();
 
-        Gate::shouldReceive('authorize')->with('delete', TaskStatus::class)->andReturn(true);
+        $response = $this->actingAsGuest()->delete(route('task_statuses.destroy', [
+            'task_status' => $taskStatus
+        ]));
 
-        $response = $this->actingAs($user)->delete(route('task_statuses.destroy', [
-            'task_status' => $taskStatus->id,
+        $response->assertStatus(403);
+
+        $response = $this->actingAs($this->user)->delete(route('task_statuses.destroy', [
+            'task_status' => $taskStatus
         ]));
 
         $response->assertRedirect(route('task_statuses.index'));
@@ -175,24 +152,10 @@ class TaskStatusControllerTest extends TestCase
         ]);
     }
 
-    public function test_delete_status_as_guest(): void
-    {
-        $taskStatus = $this->createTaskStatus();
-
-        $response = $this->actingAsGuest()->delete(route('task_statuses.destroy', [
-            'task_status' => $taskStatus->id,
-        ]));
-
-        $response->assertStatus(403);
-    }
-
     public function test_delete_status_non_existed(): void
     {
-        $user = $this->user;
-        Gate::shouldReceive('authorize')->with('delete', TaskStatus::class)->andReturn(false);
-
-        $response = $this->actingAs($user)->delete(route('task_statuses.destroy', [
-            'task_status' => 0000,
+        $response = $this->actingAs($this->user)->delete(route('task_statuses.destroy', [
+            'task_status' => 0000
         ]));
 
         $response->assertStatus(404);
@@ -200,14 +163,13 @@ class TaskStatusControllerTest extends TestCase
 
     public function test_delete_status_connected_with_tasks(): void
     {
-        $user = $this->user;
         $taskStatus = $this->createTaskStatus();
         $task = Task::factory()->create([
             'status_id' => $taskStatus->id
         ]);
 
-        $response = $this->actingAs($user)->delete(route('task_statuses.destroy', [
-            'task_status' => $taskStatus->id,
+        $response = $this->actingAs($this->user)->delete(route('task_statuses.destroy', [
+            'task_status' => $taskStatus
         ]));
 
         $response->assertRedirect(route('task_statuses.index'));
@@ -216,19 +178,19 @@ class TaskStatusControllerTest extends TestCase
         ]);
     }
 
-    protected function createTaskStatus(string $name = ''): TaskStatus
-    {
-        return empty($name) ?
-            TaskStatus::factory()->create() :
-            TaskStatus::factory()->create(['name' => $name]);
-    }
-
     public static function invalidNameProvider(): array
     {
         return [
             'empty' => [''],
             'duplicate' => ['Duplicate Name']
         ];
+    }
+
+    protected function createTaskStatus(string $name = ''): TaskStatus
+    {
+        return empty($name) ?
+            TaskStatus::factory()->create() :
+            TaskStatus::factory()->create(['name' => $name]);
     }
 
     protected function createTaskStatuses(int $pagination): Collection

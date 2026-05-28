@@ -45,11 +45,7 @@ class TaskControllerTest extends TestCase
         $response = $this->actingAsGuest()->get(route('tasks.create'));
         $response->assertStatus(403);
 
-        $user = $this->user;
-
-        Gate::shouldReceive('authorize')->with('create', Task::class)->andReturn(true);
-
-        $response = $this->actingAs($user)->get(route('tasks.create'));
+        $response = $this->actingAs($this->user)->get(route('tasks.create'));
 
         $response->assertStatus(200);
         $response->assertViewIs('tasks.create');
@@ -58,34 +54,25 @@ class TaskControllerTest extends TestCase
 
     public function test_store_task_success(): void
     {
-        $user = $this->user;
-        $status = $this->status;
-
-        Gate::shouldReceive('authorize')->with('create', Task::class)->andReturn(true);
-
-        $response = $this->actingAs($user)->post(route('tasks.store'), [
+        $response = $this->actingAs($this->user)->post(route('tasks.store'), [
             'name' => 'Test task',
-            'status_id' => $status->id
+            'status_id' => $this->status->id
         ]);
 
         $response->assertValid();
         $response->assertRedirect(route('tasks.index'));
 
         $this->assertDatabaseHas('tasks', [
-            'name' => 'Test task',
+            'name' => 'Test task'
         ]);
     }
 
     #[DataProvider('InvalidParametersProvider')]
     public function test_store_task_validation_fails(array $invalidParameters, array $expectedErrors): void
     {
-        $user = $this->user;
-
         $this->createTask();
 
-        Gate::shouldReceive('authorize')->with('create', Task::class)->andReturn(true);
-
-        $response = $this->actingAs($user)->post(route('tasks.store'), $invalidParameters);
+        $response = $this->actingAs($this->user)->post(route('tasks.store'), $invalidParameters);
 
         $response->assertInvalid($expectedErrors);
         $response->assertSessionHasErrors();
@@ -93,33 +80,22 @@ class TaskControllerTest extends TestCase
 
     public function test_edit_status_success(): void
     {
-        $user = $this->user;
         $task = $this->createTask();
 
-        Gate::shouldReceive('authorize')->with('update', Task::class)->andReturn(true);
+        $response = $this->actingAsGuest()->get(route('tasks.edit', $task));
 
-        $response = $this->actingAs($user)->get(route('tasks.edit', $task));
+        $response->assertStatus(403);
+
+        $response = $this->actingAs($this->user)->get(route('tasks.edit', $task));
 
         $response->assertStatus(200);
         $response->assertViewIs('tasks.edit');
         $response->assertViewHas('task', $task);
     }
 
-    public function test_edit_task_as_guest(): void
+    public function test_edit_task_non_existed(): void
     {
-        $task = $this->createTask();
-        $response = $this->actingAsGuest()->get(route('tasks.edit', $task));
-
-        $response->assertStatus(403);
-    }
-
-    public function test_edit_task_non_existent(): void
-    {
-        $user = $this->user;
-
-        Gate::shouldReceive('authorize')->with('update', Task::class)->andReturn(false);
-
-        $response = $this->actingAs($user)->get(route('tasks.edit', [
+        $response = $this->actingAs($this->user)->get(route('tasks.edit', [
             'task' => 000
         ]));
 
@@ -128,12 +104,10 @@ class TaskControllerTest extends TestCase
 
     public function test_update_task_success(): void
     {
-        $user = $this->user;
         $status = $this->status;
         $task = $this->createTask();
-        Gate::shouldReceive('authorize')->with('update', Task::class)->andReturn(true);
 
-        $response = $this->actingAs($user)->put(route('tasks.update', [
+        $response = $this->actingAs($this->user)->put(route('tasks.update', [
             'task' => $task
         ]), [
             'name' => 'New Test task',
@@ -153,13 +127,9 @@ class TaskControllerTest extends TestCase
     #[DataProvider('InvalidParametersProvider')]
     public function test_update_task_validation_fails(array $invalidParameters, array $expectedErrors): void
     {
-        $user = $this->user;
-
         $this->createTask();
 
-        Gate::shouldReceive('authorize')->with('create', Task::class)->andReturn(true);
-
-        $response = $this->actingAs($user)->post(route('tasks.store'), $invalidParameters);
+        $response = $this->actingAs($this->user)->post(route('tasks.store'), $invalidParameters);
 
         $response->assertInvalid($expectedErrors);
         $response->assertSessionHasErrors();
@@ -167,10 +137,9 @@ class TaskControllerTest extends TestCase
 
     public function test_delete_task_success(): void
     {
-        $user = $this->user;
-        $task = $this->createTaskWithOwner($user);
+        $task = $this->createTaskWithOwner($this->user);
 
-        $response = $this->actingAs($user)->delete(route('tasks.destroy', $task));
+        $response = $this->actingAs($this->user)->delete(route('tasks.destroy', $task));
 
         $response->assertRedirect(route('tasks.index'));
         $this->assertDatabaseMissing('tasks', [
@@ -178,31 +147,20 @@ class TaskControllerTest extends TestCase
         ]);
     }
 
-    public function test_delete_as_user(): void
-    {
-        $user = $this->user;
-        $task = $this->createTask();
-
-        $response = $this->actingAs($user)->delete(route('tasks.destroy', $task));
-
-        $response->assertStatus(403);
-    }
-
-    public function test_delete_as_guest(): void
+    public function test_delete_fails(): void
     {
         $task = $this->createTask();
 
         $response = $this->actingAsGuest()->delete(route('tasks.destroy', $task));
+        $response->assertStatus(403);
 
+        $response = $this->actingAs($this->user)->delete(route('tasks.destroy', $task));
         $response->assertStatus(403);
     }
 
-    public function test_delete_task_non_existent(): void
+    public function test_delete_task_non_existed(): void
     {
-        $user = $this->user;
-        Gate::shouldReceive('authorize')->with('delete', Task::class)->andReturn(false);
-
-        $response = $this->actingAs($user)->delete(route('tasks.destroy', [
+        $response = $this->actingAs($this->user)->delete(route('tasks.destroy', [
             'task' => 99900
         ]));
 
@@ -214,28 +172,13 @@ class TaskControllerTest extends TestCase
         $task = $this->createTask();
 
         $response = $this->actingAsGuest()->get(route('tasks.show', [
-            'task' => $task->id
+            'task' => $task
         ]));
 
         $response->assertStatus(200);
         $response->assertViewIs('tasks.show');
         $response->assertViewHas('task', $task);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public static function invalidParametersProvider(): array
     {
