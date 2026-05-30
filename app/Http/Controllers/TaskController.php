@@ -11,10 +11,13 @@ class TaskController extends Controller
 {
     public function index(TaskFilter $request)
     {
-        $tasks = Task::query()->paginate();
+        $statuses = TaskStatus::pluck('name', 'id');
+        $creators = User::whereIn('id', Task::distinct()->pluck('created_by_id'))->pluck('name', 'id');
+        $assigners = User::whereIn('id', Task::distinct()->pluck('assigned_to_id'))->pluck('name', 'id');
+
         $filteredTasks = Task::filter($request)->paginate();
 
-        return view('tasks.index', compact('tasks', 'filteredTasks'));
+        return view('tasks.index', compact('filteredTasks', 'statuses', 'creators', 'assigners'));
     }
 
     public function create()

@@ -13,7 +13,7 @@ class TaskStatusSeeder extends Seeder
      */
 
     private array $taskStatuses = [
-        'Новый',
+        'Новая',
         'В работе',
         'Тестирование',
         'Выполнено'

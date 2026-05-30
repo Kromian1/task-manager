@@ -16,13 +16,13 @@
 
     <div>
         {{ html()->form('GET', route('tasks.index'))->open() }}
-        {{ html()->select('status_id', $tasks->pluck('status.name', 'id')->unique(), request('status_id'))
+        {{ html()->select('status_id', $statuses, request('status_id'))
             ->placeholder(__('All statuses')) }}
-        {{ html()->select('created_by_id', $tasks->pluck('creator.name', 'created_by_id')->unique(), request('created_by_id'))
+        {{ html()->select('created_by_id', $creators, request('created_by_id'))
             ->placeholder(__('All creators')) }}
-        {{ html()->select('assigned_to_id', $tasks->pluck('assignee.name', 'assigned_to_id')->unique(), request('assigned_to_id'))
+        {{ html()->select('assigned_to_id', $assigners, request('assigned_to_id'))
             ->placeholder(__('All assigners')) }}
-        {{ html()->submit(__('Accept'))->class('bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded') }}
+        {{ html()->submit(__('Accept')) }}
         {{ html()->form()->close() }}
     </div>
 
@@ -56,7 +56,7 @@
                         @endcan
 
                         @can('delete', $filteredTask)
-                            {{ html()->modelForm($task, 'DELETE', route('tasks.destroy', $filteredTask))->open() }}
+                            {{ html()->modelForm($filteredTask, 'DELETE', route('tasks.destroy', $filteredTask))->open() }}
                             {{ html()->submit(__('Delete'))
                                 ->class('text-red-600 hover:text-red-900')
                                 ->attribute('onclick', "return confirm('" . __('Are you sure?') . "')")
@@ -70,7 +70,7 @@
         </table>
     </div>
 
-    <div class="mt-4">
-        {{ $filteredTasks->links() }}
+    <div class="mt-4 d-flex justify-content-center">
+        {{ $filteredTasks->links('pagination::bootstrap-3') }}
     </div>
 @endsection
