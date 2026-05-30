@@ -15,27 +15,15 @@
     </div>
 
     <div>
-        <form action="{{ route('tasks.index') }}" method="get">
-            <select name="status_id">
-                <option value="">{{ __('All statuses') }}</option>
-                @foreach($tasks as $task)
-                    <option value="{{ $task->id }}" @if(isset($_GET['status_id'])) @if($_GET['status_id'] == $task->id) selected @endif @endif>{{ $task->status->name }}</option>
-                @endforeach
-            </select>
-            <select name="created_by_id">
-                <option value="">{{ __('All creators') }}</option>
-                @foreach($tasks as $task)
-                    <option value="{{ $task->created_by_id }}" @if(isset($_GET['created_by_id'])) @if($_GET['created_by_id'] == $task->created_by_id) selected @endif @endif> {{ $task->creator->name }}</option>
-                @endforeach
-            </select>
-            <select name="assigned_to_id">
-                <option value="">{{ __('All assigners') }}</option>
-                @foreach($tasks as $task)
-                    <option value="{{ $task->assigned_to_id }}" @if(isset($_GET['assigned_to_id'])) @if($_GET['assigned_to_id'] == $task->assigned_to_id) selected @endif @endif> {{ $task->assignee->name }}</option>
-                @endforeach
-            </select>
-            <button type="submit">{{__('Accept')}}</button>
-        </form>
+        {{ html()->form('GET', route('tasks.index'))->open() }}
+        {{ html()->select('status_id', $tasks->pluck('status.name', 'id')->unique(), request('status_id'))
+            ->placeholder(__('All statuses')) }}
+        {{ html()->select('created_by_id', $tasks->pluck('creator.name', 'created_by_id')->unique(), request('created_by_id'))
+            ->placeholder(__('All creators')) }}
+        {{ html()->select('assigned_to_id', $tasks->pluck('assignee.name', 'assigned_to_id')->unique(), request('assigned_to_id'))
+            ->placeholder(__('All assigners')) }}
+        {{ html()->submit(__('Accept'))->class('bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded') }}
+        {{ html()->form()->close() }}
     </div>
 
     <div class="overflow-x-auto">
