@@ -21,15 +21,16 @@ jobs:
       - name: create database
         run: touch database/database.sqlite
 
-      - name: migrations
-        run: make init
-
       - name: Install Breeze frontend
         run: |
           php artisan breeze:install blade
           sed -i "s/import '.\/bootstrap';//" resources/js/app.js
           npm install
           npm run build
+
+      - name: migrations
+        run: make init
+
       - name: fix coding standards
         run: make lint-r
       - name: linter
