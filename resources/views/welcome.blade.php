@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="w-full px-6 py-12 bg-white text-black min-h-screen">
-        <h1 style="font-size: 2.5rem; font-weight: 700; line-height: 1.1;" class="tracking-tight mb-6 text-black">Привет от Хекслета!</h1>
-        <h3 class="text-xl font-normal text-gray-400 tracking-wide">Это простой менеджер задач на Laravel</h3>
+        <h1 style="font-size: 2.5rem; font-weight: 700; line-height: 1.1;" class="tracking-tight mb-6 text-black">{{ __('main.hello') }}</h1>
+        <h3 class="text-xl font-normal text-gray-400 tracking-wide">{{ __('main.description') }}</h3>
     </div>
 @endsection
