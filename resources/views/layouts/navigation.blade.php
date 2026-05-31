@@ -45,12 +45,9 @@
             <!-- Logout Button -->
             @auth
                 <div class="flex items-center ml-6">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="inline-flex items-center px-3 py-2 border border-transparent text-xl leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 hover:bg-gray-50 focus:outline-none transition ease-in-out duration-150">
-                            {{ __('common.log_out') }}
-                        </button>
-                    </form>
+                    <a href="{{ route('logout') }}" class="text-xl text-gray-600 hover:text-gray-900 transition">
+                        {{ __('common.log_out') }}
+                    </a>
                 </div>
             @else
                 <div class="flex items-center ml-6">
