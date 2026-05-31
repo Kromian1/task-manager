@@ -5,7 +5,7 @@ return [
     'unique' => 'Такое значение поля :attribute уже существует.',
     'exists' => 'Выбранное значение для :attribute некорректно.',
     'min' => [
-        'string' => ':attribute должно содержать минимум :min символов.',
+        'string' => ':attribute должен иметь длину не менее :min символов.',
     ],
     'attributes' => [
         'name' => 'Название',
