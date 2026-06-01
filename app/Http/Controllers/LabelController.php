@@ -28,10 +28,7 @@ class LabelController extends Controller
     {
         Gate::authorize('create', Label::class);
 
-        $data = $request->validate([
-            'name' => 'required|min:1|unique:labels,name',
-            'description' => 'nullable',
-        ]);
+        $data = $request->validated();
 
         $label = new Label();
         $label->fill($data)->save();
@@ -56,10 +53,7 @@ class LabelController extends Controller
 
         Gate::authorize('update', $label);
 
-        $data = $request->validate([
-            'name' => 'required|min:1|unique:labels,name, {$label->id}',
-            'description' => 'nullable',
-        ]);
+        $data = $request->validated();
 
         $label->fill($data)->save();
 

@@ -28,9 +28,7 @@ class TaskStatusController extends Controller
     {
         Gate::authorize('create', TaskStatus::class);
 
-        $data = $request->validate([
-            'name' => 'required|min:1|unique:task_statuses',
-        ]);
+        $data = $request->validated();
 
         $status = new TaskStatus();
         $status->fill($data)->save();
@@ -55,9 +53,7 @@ class TaskStatusController extends Controller
 
         Gate::authorize('update', $status);
 
-        $data = $request->validate([
-            'name' => "required|min:1|unique:task_statuses,name,{$status->id}",
-        ]);
+        $data = $request->validated();
 
         $status->fill($data)->save();
 

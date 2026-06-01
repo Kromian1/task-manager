@@ -24,6 +24,7 @@ class LabelRequest extends FormRequest
     {
         return [
             'name' => 'required|min:1|unique:labels,name',
+            'description' => 'nullable'
         ];
     }
 
