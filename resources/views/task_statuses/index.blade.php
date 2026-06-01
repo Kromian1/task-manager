@@ -35,10 +35,13 @@
 
                         @can('delete', $status)
                             {{ html()->modelForm($status, 'DELETE', route('task_statuses.destroy', $status))->open() }}
-                            {{ html()->submit(__('status.delete'))
-                                ->class('text-red-600 hover:text-red-900')
-                                ->attribute('onclick', "return confirm('" . __('common.are_you_sure') . "')")
-                            }}
+                                {{ html()->a('#', __('status.delete'))
+                                    ->class('text-red-600 hover:text-red-900')
+                                    ->attribute(
+                                        'onclick',
+                                        "if(confirm('" . __('common.are_you_sure') . "')) { this.closest('form').submit(); } return false;"
+                                    )
+                                }}
                             {{ html()->closeModelForm() }}
                         @endcan
                     </td>
