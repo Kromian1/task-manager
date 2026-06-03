@@ -54,7 +54,9 @@ class TaskController extends Controller
         ]);
 
         $task->fill($data)->save();
-        dd($task);
+        if ($task->name === 'Task 4') {
+            dd($task);
+        }
 
         $task->labels()->sync($request->input('labels', []));
 
