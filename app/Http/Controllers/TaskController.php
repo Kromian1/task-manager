@@ -30,7 +30,8 @@ class TaskController extends Controller
 
         $task = new Task();
         $statuses = TaskStatus::pluck('name', 'id');
-        $users = User::pluck('name', 'id');
+        //$users = User::pluck('name', 'id');
+        $users = User::all();
 
         throw new \Exception(json_encode([
             'users' => $users->toArray(),
