@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
     {
         if ($request->name === 'Pair') {
             throw new \Exception(json_encode([
-                'request' => $request,
+                'request' => $request->all,
             ], JSON_PRETTY_PRINT));
         }
 
@@ -47,12 +47,6 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
-        if ($user === 'Pair') {
-            throw new \Exception(json_encode([
-                'user' => $user,
-            ]));
-        }
 
         event(new Registered($user));
 
