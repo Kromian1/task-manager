@@ -55,7 +55,13 @@ class TaskController extends Controller
 
         $task->fill($data)->save();
         if ($task->name === 'Task 4') {
-            dd($task);
+            throw new \Exception(json_encode([
+                'task_id' => $task->id,
+                'assigned_to_id' => $task->assigned_to_id,
+                'assignee_name' => $task->assignee?->name,
+                'request_assigned_to_id' => $request->input('assigned_to_id'),
+                'users' => User::pluck('name', 'id')->toArray(),
+            ], JSON_PRETTY_PRINT));
         }
 
         $task->labels()->sync($request->input('labels', []));
