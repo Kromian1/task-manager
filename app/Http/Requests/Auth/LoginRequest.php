@@ -40,9 +40,10 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
-        $this->ensureIsNotRateLimited();
+        //debug
+        session(['debug_login_hit' => now()->toDateTimeString()]);
 
-        $user = \App\Models\User::where('email', $this->email)->first();
+        $this->ensureIsNotRateLimited();
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
