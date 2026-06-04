@@ -70,12 +70,12 @@
                         @endcan
 
                         @can('delete', $filteredTask)
-                            {{ html()->modelForm($filteredTask, 'DELETE', route('tasks.destroy', $filteredTask))->open() }}
-                            {{ html()->submit(__('button.delete'))
-                                ->class('text-red-600 hover:text-red-900')
-                                ->attribute('onclick', "return confirm('" . __('common.are_you_sure') . "')")
-                            }}
-                            {{ html()->closeModelForm() }}
+                                <a href="{{ route('tasks.destroy', $filteredTask) }}"
+                                   class="text-red-600 hover:text-red-900"
+                                   data-method="delete"
+                                   data-confirm="{{ __('common.are_you_sure') }}">
+                                    {{ __('button.delete') }}
+                                </a>
                         @endcan
                     </td>
                 </tr>
