@@ -26,6 +26,10 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        if (auth()->user()?->email === 'pair@example.com') {
+            dump(session()->all());
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended(route('welcome', absolute: false));
