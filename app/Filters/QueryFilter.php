@@ -21,7 +21,7 @@ class QueryFilter
 
     public function filters()
     {
-        return $this->request->query();
+        return $this->request->get('filter', []);
     }
 
     public function apply(Builder $builder)
