@@ -44,16 +44,19 @@ class LoginRequest extends FormRequest
 
         $user = \App\Models\User::where('email', $this->email)->first();
 
-        dd([
-            'email' => $this->email,
-            'password' => $this->password,
-            'user_found' => $user !== null,
-            'user_id' => $user?->id,
-            'user_email' => $user?->email,
-            'password_check' => $user
-                ? \Illuminate\Support\Facades\Hash::check($this->password, $user->password)
-                : null,
-        ]);
+        if ($this->email === 'pair@hexlet.io') {
+            dd([
+                'email' => $this->email,
+                'password' => $this->password,
+                'user_found' => $user !== null,
+                'user_id' => $user?->id,
+                'user_email' => $user?->email,
+                'password_check' => $user
+                    ? \Illuminate\Support\Facades\Hash::check($this->password, $user->password)
+                    : null,
+            ]);
+        }
+
 
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
