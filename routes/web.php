@@ -24,10 +24,10 @@ Route::middleware('auth')->group(function () {
     Route::delete(RouteConstants::PROFILE, [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('task_statuses', TaskStatusController::class);
-
-Route::resource('tasks', TaskController::class);
-
-Route::resource('labels', LabelController::class);
+Route::resources([
+    'tasks' => TaskController::class,
+    'task_statuses' => TaskStatusController::class,
+    'labels' => LabelController::class
+]);
 
 require __DIR__ . '/auth.php';
