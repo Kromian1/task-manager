@@ -2,10 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\TaskStatus;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Auth;
 
 class TaskStatusPolicy
 {
@@ -19,24 +16,18 @@ class TaskStatusPolicy
         return true;
     }
 
-    public function create(): Response
+    public function create(User $user): bool
     {
-        return Auth::check()
-            ? Response::allow()
-            : Response::deny(__('You do not have permission to create status'));
+        return true;
     }
 
-    public function update(): Response
+    public function update(User $user): bool
     {
-        return Auth::check()
-            ? Response::allow()
-            : Response::deny(__('You do not have permission to update status'));
+        return true;
     }
 
-    public function delete(): Response
+    public function delete(User $user): bool
     {
-        return Auth::check()
-            ? Response::allow()
-            : Response::deny(__('You do not have permission to delete status'));
+        return true;
     }
 }

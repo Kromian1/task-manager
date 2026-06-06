@@ -5,7 +5,6 @@ namespace App\Policies;
 use App\Models\Task;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
-use Illuminate\Support\Facades\Auth;
 
 class TaskPolicy
 {
@@ -19,24 +18,20 @@ class TaskPolicy
         return true;
     }
 
-    public function create(): Response
+    public function create(User $user): bool
     {
-        return Auth::check()
-            ? Response::allow()
-            : Response::deny(__('You do not have permission to create task'));
+        return true;
     }
 
-    public function update(): Response
+    public function update(User $user): bool
     {
-        return Auth::check()
-            ? Response::allow()
-            : Response::deny(__('You do not have permission to update task'));
+        return true;
     }
 
     public function delete(User $user, Task $task): Response
     {
         return $user->id === $task->created_by_id ?
             Response::allow() :
-            Response::deny(__('You do not have permission to delete task'));
+            Response::deny(__('permission.delete_task'));
     }
 }
