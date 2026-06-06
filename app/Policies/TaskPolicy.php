@@ -28,10 +28,8 @@ class TaskPolicy
         return true;
     }
 
-    public function delete(User $user, Task $task): Response
+    public function delete(User $user, Task $task): bool
     {
-        return $user->id === $task->created_by_id ?
-            Response::allow() :
-            Response::deny(__('permission.delete_task'));
+        return $user->id === $task->created_by_id;
     }
 }
