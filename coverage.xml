@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1780737727">
-  <project timestamp="1780737727" name="Clover Coverage">
+<coverage generated="1780738429">
+  <project timestamp="1780738429" name="Clover Coverage">
     <package name="App\Filters">
       <file name="/home/user/projects/task-manager/app/Filters/QueryFilter.php">
         <class name="App\Filters\QueryFilter" namespace="App\Filters">
