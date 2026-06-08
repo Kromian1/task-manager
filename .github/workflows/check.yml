@@ -35,7 +35,12 @@ jobs:
         run: make lint
 
       - name: Tests
+        if: matrix.os == 'ubuntu-latest'
         run: make test
+
+      - name: Tests without coverage
+        if: matrix.os =='macos-latest'
+        run: php artisan test
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v6
