@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->foreignId('status_id')->constrained('task_statuses')->index();
-            $table->foreignId('created_by_id')->constrained('users')->index()->nullOnDelete();
-            $table->foreignId('assigned_to_id')->nullable()->constrained('users')->index()->nullOnDelete();
+            $table->foreignId('status_id')->constrained('task_statuses');
+            $table->foreignId('created_by_id')->constrained('users')->nullOnDelete();
+            $table->foreignId('assigned_to_id')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamps();
         });
     }
