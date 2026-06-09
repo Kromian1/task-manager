@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('task_id')->constrained('tasks')->onDelete('cascade');
             $table->foreignId('label_id')->constrained('labels')->onDelete('cascade');
             $table->timestamps();
-            $table->unique(['task_id', 'label_id']);
+            $table->primary(['task_id', 'label_id']);
         });
     }
 
