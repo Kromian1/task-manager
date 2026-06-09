@@ -18,7 +18,7 @@
             </tr>
             <tr class="border-b">
                 <th class="px-6 py-3 bg-gray-100 dark:bg-gray-700 text-left">{{ __('task.creator') }}</th>
-                <td class="px-6 py-4">{{ $task->creator->name }}</td>
+                <td class="px-6 py-4">{{ $task->createdBy->name }}</td>
             </tr>
             <tr class="border-b">
                 <th class="px-6 py-3 bg-gray-100 dark:bg-gray-700 text-left">{{ __('task.executor') }}</th>
