@@ -81,6 +81,7 @@
     "filter.all_statuses": "Все статусы",
     "filter.all_creators": "Все создатели",
     "filter.all_assigners": "Все исполнители",
+    "filter.all_names": "Все задачи",
     "filter.select_user": "Выберите исполнителя",
     "filter.select_status": "Выберите статус",
 

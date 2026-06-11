@@ -82,6 +82,7 @@
     "filter.all_statuses": "All statuses",
     "filter.all_creators": "All creators",
     "filter.all_assigners": "All assigners",
+    "filter.all_names": "All task names",
     "filter.select_user": "Select user",
     "filter.select_status": "Select status",
 
