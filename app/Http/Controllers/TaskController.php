@@ -45,7 +45,14 @@ class TaskController extends Controller
             'id' => $request->input('filter.id')
         ];
 
-        return view('tasks.index', compact('filteredTasks', 'statuses', 'creators', 'assigners', 'taskNames', 'filters'));
+        return view('tasks.index', compact(
+            'filteredTasks',
+            'statuses',
+            'creators',
+            'assigners',
+            'taskNames',
+            'filters'
+        ));
     }
 
     public function create()
