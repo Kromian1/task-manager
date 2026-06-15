@@ -4,9 +4,9 @@ namespace App;
 
 final class RouteConstants
 {
-    public const PROFILE = '/profile';
-    public const REGISTER = '/register';
-    public const LOGIN = '/login';
-    public const FORGOT_PASSWORD = '/forgot-password';
-    public const CONFIRM_PASSWORD = '/confirm-password';
+    public const string PROFILE = '/profile';
+    public const string REGISTER = '/register';
+    public const string LOGIN = '/login';
+    public const string FORGOT_PASSWORD = '/forgot-password';
+    public const string CONFIRM_PASSWORD = '/confirm-password';
 }
