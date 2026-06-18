@@ -4,6 +4,7 @@
     "common.statuses": "Statuses",
     "common.tasks": "Tasks",
     "common.labels": "Labels",
+    "common.users": "Users",
     "common.login": "Login",
     "common.register": "Register",
     "common.profile": "Profile",
@@ -28,6 +29,12 @@
     "common.forgot_password_description": "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.",
     "common.email_reset_password_link": "Email Password Reset Link",
 
+    "welcome.description": "A simple and convenient application for managing tasks, statuses, labels and executors.",
+    "welcome.tasks.description": "Create, edit and manage project tasks.",
+    "welcome.statuses.description": "Track task progress from creation to completion.",
+    "welcome.labels.description": "Categorize and filter tasks using labels.",
+    "welcome.users.description": "Assign tasks to team members and collaborate effectively.",
+
     "task.create": "Create task",
     "task.edit": "Edit task",
     "task.delete": "Delete",
@@ -51,9 +58,6 @@
     "label.delete": "Delete",
     "label.name": "Name",
     "label.description": "Description",
-
-    "main.hello": "Hello from Hexlet",
-    "main.description": "This is simple Task manager on Laravel",
 
     "dashboard.info": "You're logged in!",
 

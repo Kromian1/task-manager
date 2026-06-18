@@ -3,6 +3,7 @@
     "common.statuses": "Статусы",
     "common.tasks": "Задачи",
     "common.labels": "Метки",
+    "common.users": "Пользователи",
     "common.login": "Вход",
     "common.log_in": "Войти",
     "common.register": "Регистрация",
@@ -27,6 +28,12 @@
     "common.confirm": "Подтвердить",
     "common.forgot_password_description": "Забыли свой пароль? Без проблем. Просто сообщите нам свой адрес электронной почты, и мы вышлем Вам по электронной почте ссылку для сброса пароля, которая позволит вам установить новый пароль.",
     "common.email_reset_password_link": "Почта сброса пароля",
+
+    "welcome.description": "Простое и удобное приложение для управления задачами, статусами, метками и исполнителями.",
+    "welcome.tasks.description": "Создавайте, редактируйте и управляйте задачами проекта.",
+    "welcome.statuses.description": "Отслеживайте прогресс задач от создания до завершения.",
+    "welcome.labels.description": "Группируйте и фильтруйте задачи с помощью меток.",
+    "welcome.users.description": "Назначайте исполнителей и эффективно организуйте командную работу.",
 
     "register.register": "Зарегистрировать",
 
@@ -53,9 +60,6 @@
     "label.delete": "Удалить",
     "label.name": "Название",
     "label.description": "Описание",
-
-    "main.hello": "Привет от Хекслета!",
-    "main.description": "Это простой менеджер задач на Laravel",
 
     "dashboard.info": "Вы авторизованы!",
 
