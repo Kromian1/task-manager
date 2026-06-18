@@ -39,6 +39,7 @@ jobs:
         run: make test
 
       - name: SonarCloud Scan
+        if: matrix.os == 'ubuntu-latest'
         uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
