@@ -5,7 +5,7 @@
             <div class="flex items-center">
                 <!-- Navigation Links -->
                 <div class="flex items-center space-x-8">
-                    <x-nav-link :href="route('tasks.index')" class="!text-3xl font-semibold">
+                    <x-nav-link :href="route('welcome')" class="!text-3xl font-semibold">
                         {{ __('common.task_manager') }}
                     </x-nav-link>
                     <x-nav-link :href="route('task_statuses.index')" :active="request()->routeIs('task_statuses.index')" class="text-xl">
