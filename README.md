@@ -1,8 +1,7 @@
 # Менеджер задач
 
-### Тесты и состояние проекта:
+### Статус проекта:
 [![check.yml](https://github.com/Kromian1/php-project-57/actions/workflows/check.yml/badge.svg)](https://github.com/Kromian1/php-project-57/actions/workflows/check.yml)
-[![hexlet-check](https://github.com/Kromian1/php-project-57/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Kromian1/php-project-57/actions/workflows/hexlet-check.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Kromian1_php-project-57&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Kromian1_php-project-57)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Kromian1_php-project-57&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Kromian1_php-project-57)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Kromian1_php-project-57&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Kromian1_php-project-57)
@@ -181,21 +180,21 @@
 
 ### 1. Клонирование репозитория
 
-git clone https://github.com/Kromian1/php-project-57.git
+`git clone https://github.com/Kromian1/php-project-57.git`
 
-cd php-project-57
+`cd php-project-57`
 
 ### Установка зависимостей
 
-make install
+`make install`
 
-npm install
+`npm install`
 
-make dump
+`make dump`
 
 ### Инициализация проекта
 
-make init
+`make init`
 
 Команда:
 
@@ -206,7 +205,7 @@ make init
 
 ### Запуск приложения
 
-make start-dev
+`make start-dev`
 
 После запуска приложение будет доступно по адресу:
 
@@ -216,25 +215,25 @@ http://localhost:8000
 
 **Выполнить все тесты:**
 
-make test
+`make test`
 
 **Выполнить все тесты с проверкой покрытия кода:**
 
-make test-c
+`make test-c`
 
 **Выполнить все тесты с генерацией html-отчета о покрытии кода:**
 
-make test-h
+`make test-h`
 
 ### Проверка качества кода
 
 Линтинг кода:
 
-make lint
+`make lint`
 
 Автоматическое исправление кода:
 
-make lint-r
+`make lint-r`
 
 ### Структура проекта
 
