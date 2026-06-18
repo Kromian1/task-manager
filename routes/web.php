@@ -5,12 +5,11 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskStatusController;
+use App\Http\Controllers\WelcomeController;
 use App\RouteConstants;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Route::get('language/{locale}', [LanguageController::class, 'switchLanguage'])->name('language.switch');
 
