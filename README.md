@@ -13,7 +13,6 @@
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=Kromian1_php-project-57&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=Kromian1_php-project-57)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Kromian1_php-project-57&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Kromian1_php-project-57)
 
-
 ## О проекте
 
 **Менеджер задач** — это веб-приложение для управления задачами, разработанное на Laravel 13.
@@ -21,6 +20,32 @@
 
 ## Демо
 [Менеджер задач на Render.com](https://php-project-57-avpo.onrender.com)
+
+## Скриншоты
+
+### Главная страница
+
+![main_page.png](docs/images/main_page.png)
+
+### Статусы
+
+![index_statuses.png](docs/images/index_statuses.png)
+
+### Метки
+
+![index_labels.png](docs/images/index_labels.png)
+
+### Задачи
+
+![index_tasks.png](docs/images/index_tasks.png)
+
+### Создание задачи
+
+![create_task.png](docs/images/create_task.png)
+
+### Отображение задачи
+
+![show_task.png](docs/images/show_task.png)
 
 ## Возможности
 
